@@ -63,6 +63,11 @@
                     "default": 5,
                     "description": "The intensity with which the screen shakes"
                 },
+                "powermode.cursorCss": {
+                    "type":"string",
+                    "default": "",
+                    "description": "ym"
+                },
                 "powermode.customExplosions": {
                     "type": "array",
                     "items": "string",

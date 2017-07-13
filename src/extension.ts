@@ -15,6 +15,7 @@ let customExplosions: string[];
 let enableExplosions: boolean;
 let enableShake: boolean;
 let shakeIntensity: number;
+let cursorCss: string;
 
 // PowerMode components
 let screenShaker: ScreenShaker;
@@ -96,6 +97,9 @@ function onDidChangeConfiguration() {
     enableExplosions = config.get<boolean>('enableExplosions', true);
     shakeIntensity = config.get<number>('shakeIntensity', 5);
     enableShake = config.get<boolean>('enableShake', true);
+
+    cursorCss = config.get<string>("cursorCss", "");
+    if (cursorExploder) cursorExploder.cursorCss = cursorCss;
 
     // Switching from disabled to enabled
     if (!oldEnabled && enabled) {
