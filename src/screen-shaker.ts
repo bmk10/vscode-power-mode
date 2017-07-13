@@ -72,6 +72,8 @@ export class ScreenShaker {
             activeEditor.setDecorations(this.positiveY, []);
             activeEditor.setDecorations(this.negativeY, this.fullRange);
         }
+
+        setTimeout(this.unshake, 200);
     }
 
     /**
