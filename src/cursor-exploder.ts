@@ -51,7 +51,7 @@ export class CursorExploder {
 
         let decorator = vscode.window.createTextEditorDecorationType(<vscode.DecorationRenderOptions>{
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
-            textDecoration: `none; color: RGBA(0, 0, 0, 0); background-repeat: no-repeat; left: ${x / 2.09}rem; top: ${y * 1.18}rem; position: fixed; margin-top: -30px; height: 70px; width: 70px; background-size: contain; ${this.cursorCss};background-image: url('${explosion}')`
+            textDecoration: `none; color: RGBA(0, 0, 0, 0); background-repeat: no-repeat; left: ${x / 2.09}rem; position: absolute; margin-top: -30px; height: 70px; width: 70px; background-size: contain; ${this.cursorCss};background-image: url('${explosion}')`
         });
 
         return decorator;
