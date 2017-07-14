@@ -155,6 +155,10 @@ function isPowerMode() {
 }
 
 function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
+    if (event.document.languageId.indexOf("utput") !== -1 || event.contentChanges.length === 0 || event.contentChanges[0].text === " ") {
+        return;
+    }
+
     combo++;
 
     if (progressBarTimer) {
@@ -170,7 +174,7 @@ function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
     }
 
     if (isPowerMode()) {
-        if (enableExplosions && event.document.languageId.indexOf("output") === -1 && event.contentChanges[0].text !== " " && cursorExploder) {
+        if (enableExplosions && cursorExploder) {
             cursorExploder.explode();
         }
 
