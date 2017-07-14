@@ -6,6 +6,9 @@ Features added:
 
 It will not work if typing on the first line of a document or if typing right under a collapse section of code.
 
+![new demo](images/power-mode-ex-demo.gif)
+
+
 Original description:
 
 # VSCODE POWER MODE!!!
