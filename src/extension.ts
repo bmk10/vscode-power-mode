@@ -16,6 +16,7 @@ let enableExplosions: boolean;
 let enableShake: boolean;
 let shakeIntensity: number;
 let cursorCss: string;
+let explosionModulo: number = 3;
 
 // PowerMode components
 let screenShaker: ScreenShaker;
@@ -37,7 +38,10 @@ function init() {
     combo = 0;
 
     screenShaker = new ScreenShaker();
+
     cursorExploder = new CursorExploder(customExplosions);
+    if (explosionModulo) cursorExploder.explosionModulo = explosionModulo;
+
     progressBarTimer = new ProgressBarTimer();
     statusBarItem = new StatusBarItem();
 
@@ -99,10 +103,12 @@ function onDidChangeConfiguration() {
     enableShake = config.get<boolean>('enableShake', true);
 
     cursorCss = config.get<string>("cursorCss", "");
-    let explosionRarity = config.get<number>("explosionRarity", 3);
+    explosionModulo = config.get<number>("explosionRarity", 3);
 
     if (cursorExploder) cursorExploder.cursorCss = cursorCss;
-    if (explosionRarity && cursorExploder) cursorExploder.explosionModulo = explosionRarity;
+    if (explosionModulo && cursorExploder) {
+        cursorExploder.explosionModulo = explosionModulo;
+    }
 
     // Switching from disabled to enabled
     if (!oldEnabled && enabled) {
@@ -155,7 +161,9 @@ function isPowerMode() {
 }
 
 function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
-    if (event.document.languageId.indexOf("utput") !== -1 || event.contentChanges.length === 0 || event.contentChanges[0].text === " ") {
+    if (event.document.languageId.indexOf("utput") !== -1 ||
+        event.contentChanges.length === 0 ||
+        event.contentChanges[0].text.trim() === "") {
         return;
     }
 
