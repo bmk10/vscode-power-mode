@@ -1,3 +1,6 @@
+*This is my fork of power mode by hooverc and has serious limitations. You can not use it with any Code Lenses (like git Lenses or typescripts reference lenses). Also, you need to enable "files.trimTrailingWhitespace": true in your settings or trailing whitespaces will be left in your code.*
+
+
 # VSCODE POWER MODE!!!
 
 Power Mode is one of the most requested extensions for VS Code. Unfortunatley, they said it couldn't be done...
