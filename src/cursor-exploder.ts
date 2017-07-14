@@ -64,11 +64,8 @@ export class CursorExploder {
      * "Explodes" where the cursor is by setting a text decoration
      * that contains a base64 encoded gif as the background image.
      * The gif is then removed 1 second later
-     *
-     * @param {boolean} [left=false] place the decoration to
-     * the left or the right of the cursor
      */
-    explode = (left = false) => {
+    explode = () => {
         if (this.editting || this.trimming || this.deleting || this.count++ % this.explosionModulo != 0) return;
 
         const activeEditor = vscode.window.activeTextEditor;

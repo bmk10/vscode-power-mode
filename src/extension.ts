@@ -171,12 +171,7 @@ function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
 
     if (isPowerMode()) {
         if (enableExplosions && cursorExploder) {
-            // If the content change is empty then it was likely a delete
-            // This means there may not be text after the cursor, so do the
-            // explosion before instead.
-            const changes = event.contentChanges[0];
-            const left = changes && changes.text.length === 0;
-            cursorExploder.explode(left);
+            cursorExploder.explode();
         }
 
         if (enableShake && screenShaker && (!cursorExploder || !cursorExploder.isEditing())) {
