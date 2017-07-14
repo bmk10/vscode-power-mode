@@ -97,32 +97,45 @@ export class CursorExploder {
                     decoration.dispose();
 
                     // try to cleanup whitespace (safe space)
-                    {
-                        if (lineNumToUse >= activeEditor.document.lineCount) return;
-
-                        let lineText = activeEditor.document.lineAt(lineNumToUse).text;
-                        let whitespaceStarts = lineText.length - (lineText.length - this.removeTrailingWhitespace(lineText).length) + 1;
-                        let positionToDelete = new vscode.Position(lineNumToUse, whitespaceStarts);
-
-                        this.deleting = true;
-                        activeEditor.edit(
-                            (bundler) => bundler.delete(new vscode.Range(positionToDelete, new vscode.Position(positionToDelete.line, positionToDelete.character + 2))),
-                            { undoStopAfter: false, undoStopBefore: false }
-                        ).then(() => {
-                            this.deleting = false;
-                        });
-                    }
-
-                    if (this.activeExplosions <= 0) {
-                        this.trimming = true;
-                        vscode.commands.executeCommand("editor.action.trimTrailingWhitespace").then(() => this.trimming = false);
-                    }
-
+                    this.tryCleanupWhitespace(lineNumToUse);
+                    // this.trimWhitespaceGlobal();
                 }, 1000);
 
                 activeEditor.setDecorations(decoration, [newRange]);
-                console.log(newRange);
             });
+    }
+
+    private tryCleanupWhitespace(lineNumToUse: number) {
+        let activeEditor = vscode.window.activeTextEditor;
+        if (lineNumToUse >= activeEditor.document.lineCount) return;
+
+        let lineText = activeEditor.document.lineAt(lineNumToUse).text;
+        let whitespaceStarts = lineText.length - (lineText.length - this.removeTrailingWhitespace(lineText).length) + 1;
+        let positionToDelete = new vscode.Position(lineNumToUse, whitespaceStarts);
+
+        this.deleting = true;
+        activeEditor.edit(
+            (bundler) => bundler.delete(new vscode.Range(positionToDelete, new vscode.Position(positionToDelete.line, positionToDelete.character + 2))),
+            { undoStopAfter: false, undoStopBefore: false }
+        ).then((success) => {
+            this.deleting = false;
+
+            if (!success) {
+                this.tryCleanupWhitespace(lineNumToUse);
+                console.log("try to delete again");
+            }
+        });
+    }
+
+    private trimWhitespaceGlobal() {
+        if (this.activeExplosions <= 0) {
+            // let activeEditor = vscode.window.activeTextEditor;
+            // let cursor = activeEditor.selection.active;
+            // let line = activeEditor.document.lineAt(cursor.line).text;
+
+            this.trimming = true;
+            vscode.commands.executeCommand("editor.action.trimTrailingWhitespace").then(() => this.trimming = false);
+        }
     }
 
     private removeTrailingWhitespace(line: string): string {
@@ -137,13 +150,11 @@ export class CursorExploder {
         return line.substring(0, whitespaceStart);
     }
 
-    public isEditing()
-    {
+    public isEditing() {
         return this.editting || this.trimming || this.deleting;
     }
 
-    public cleanUp()
-    {
+    public cleanUp() {
         this.activeExplosions = 0;
         this.editting = false;
         this.count = 0;
