@@ -29,8 +29,11 @@ interface Map<T> {
 export class CursorExploder {
 
     public cursorCss: string;
+    public explosionModulo: number = 3;
     private count: number = 0;
     private editting = false;
+    private trimming = false;
+    private deleting = false;
     private activeExplosions: number = 0;
 
     constructor(private explosions) {
@@ -66,7 +69,7 @@ export class CursorExploder {
      * the left or the right of the cursor
      */
     explode = (left = false) => {
-        if (this.editting || this.count++ % 3 != 0) return;
+        if (this.editting || this.trimming || this.deleting || this.count++ % this.explosionModulo != 0) return;
 
         const activeEditor = vscode.window.activeTextEditor;
         const cursorPosition = activeEditor.selection.active;
@@ -101,18 +104,18 @@ export class CursorExploder {
                         let whitespaceStarts = lineText.length - (lineText.length - this.removeTrailingWhitespace(lineText).length) + 1;
                         let positionToDelete = new vscode.Position(lineNumToUse, whitespaceStarts);
 
-                        this.editting = true;
+                        this.deleting = true;
                         activeEditor.edit(
                             (bundler) => bundler.delete(new vscode.Range(positionToDelete, new vscode.Position(positionToDelete.line, positionToDelete.character + 2))),
                             { undoStopAfter: false, undoStopBefore: false }
                         ).then(() => {
-                            this.editting = false;
+                            this.deleting = false;
                         });
                     }
 
                     if (this.activeExplosions <= 0) {
-                        this.editting = true;
-                        vscode.commands.executeCommand("editor.action.trimTrailingWhitespace").then(() => this.editting = false);
+                        this.trimming = true;
+                        vscode.commands.executeCommand("editor.action.trimTrailingWhitespace").then(() => this.trimming = false);
                     }
 
                 }, 1000);
@@ -136,7 +139,7 @@ export class CursorExploder {
 
     public isEditing()
     {
-        return this.editting;
+        return this.editting || this.trimming || this.deleting;
     }
 
     public cleanUp()

@@ -1,10 +1,12 @@
-*This is my fork of power mode by hooverc and has serious limitations. You can not use it with any Code Lenses (like git Lenses or typescripts reference lenses). Also, you need to enable "files.trimTrailingWhitespace": true in your settings or trailing whitespaces will be left in your code.*
+*This is my fork of power mode by hooverc ~~and has serious limitations. You can not use it with any Code Lenses (like git Lenses or typescripts reference lenses).~~ Also, you need to enable "files.trimTrailingWhitespace": true in your settings or trailing whitespaces will be left in your code. But cool people have this enabled anyways... just sayin'*
 
 Features added:
 * Bigger explosions!!!!!!!!!!!!!11one
 * Screen shake will not leave your text in a scewed state.
-* More limitations!!!1 oh wait... that's bad
 
+It will not work if typing on the first line of a document or if typing right under a collapse section of code.
+
+Original description:
 
 # VSCODE POWER MODE!!!
 

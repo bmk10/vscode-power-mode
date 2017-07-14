@@ -99,7 +99,10 @@ function onDidChangeConfiguration() {
     enableShake = config.get<boolean>('enableShake', true);
 
     cursorCss = config.get<string>("cursorCss", "");
+    let explosionRarity = config.get<number>("explosionRarity", 3);
+
     if (cursorExploder) cursorExploder.cursorCss = cursorCss;
+    if (explosionRarity && cursorExploder) cursorExploder.explosionModulo = explosionRarity;
 
     // Switching from disabled to enabled
     if (!oldEnabled && enabled) {
