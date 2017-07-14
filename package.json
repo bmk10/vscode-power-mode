@@ -2,7 +2,7 @@
     "name": "vscode-power-mode-ex",
     "displayName": "Power Mode EX",
     "description": "Your code is powerful, unleash it! The extension made popular by Code in the Dark has finally made its way to VS Code. Now with bigger explosions and more ghetto implementations filled with bugs.",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "horvay",
     "icon": "images/icon-large.png",
     "author": {
