@@ -65,13 +65,13 @@ export class ScreenShaker {
             activeEditor.setDecorations(this.negativeX, xRanges);
         }
 
-        if (Math.random() > 0.5) {
-            activeEditor.setDecorations(this.negativeY, []);
-            activeEditor.setDecorations(this.positiveY, this.fullRange);
-        } else {
-            activeEditor.setDecorations(this.positiveY, []);
-            activeEditor.setDecorations(this.negativeY, this.fullRange);
-        }
+        // if (Math.random() > 0.5) {
+        //     activeEditor.setDecorations(this.negativeY, []);
+        //     activeEditor.setDecorations(this.positiveY, this.fullRange);
+        // } else {
+        //     activeEditor.setDecorations(this.positiveY, []);
+        //     activeEditor.setDecorations(this.negativeY, this.fullRange);
+        // }
 
         setTimeout(this.unshake, 200);
     }
