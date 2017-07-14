@@ -141,6 +141,10 @@ function onProgressTimerExpired() {
     if (screenShaker) {
         screenShaker.unshake();
     }
+
+    if (cursorExploder) {
+        cursorExploder.cleanUp();
+    }
 }
 
 function isPowerMode() {
@@ -172,7 +176,7 @@ function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
             cursorExploder.explode(left);
         }
 
-        if (enableShake && screenShaker) {
+        if (enableShake && screenShaker && (!cursorExploder || !cursorExploder.isEditing())) {
             screenShaker.shake();
         }
     }

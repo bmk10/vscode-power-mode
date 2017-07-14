@@ -110,6 +110,11 @@ export class CursorExploder {
                         });
                     }
 
+                    if (this.activeExplosions <= 0) {
+                        this.editting = true;
+                        vscode.commands.executeCommand("editor.action.trimTrailingWhitespace").then(() => this.editting = false);
+                    }
+
                 }, 1000);
 
                 activeEditor.setDecorations(decoration, [newRange]);
@@ -127,6 +132,18 @@ export class CursorExploder {
         }
 
         return line.substring(0, whitespaceStart);
+    }
+
+    public isEditing()
+    {
+        return this.editting;
+    }
+
+    public cleanUp()
+    {
+        this.activeExplosions = 0;
+        this.editting = false;
+        this.count = 0;
     }
 
     dispose = () => {
