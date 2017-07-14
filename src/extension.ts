@@ -182,12 +182,12 @@ function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
     }
 
     if (isPowerMode()) {
-        if (enableExplosions && cursorExploder) {
-            cursorExploder.explode();
-        }
-
         if (enableShake && screenShaker && (!cursorExploder || !cursorExploder.isEditing())) {
             screenShaker.shake();
+        }
+
+        if (enableExplosions && cursorExploder) {
+            cursorExploder.explode();
         }
     }
 }
