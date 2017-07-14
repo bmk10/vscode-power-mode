@@ -1,24 +1,24 @@
 {
-    "name": "vscode-power-mode",
-    "displayName": "Power Mode",
-    "description": "Your code is powerful, unleash it! The extension made popular by Code in the Dark has finally made its way to VS Code.",
+    "name": "vscode-power-mode-ex",
+    "displayName": "Power Mode EX",
+    "description": "Your code is powerful, unleash it! The extension made popular by Code in the Dark has finally made its way to VS Code. Now with bigger explosions and more ghetto implementations filled with bugs.",
     "version": "0.0.1",
-    "publisher": "hoovercj",
+    "publisher": "horvay",
     "icon": "images/icon-large.png",
     "author": {
-        "name": "Cody Hoover",
-        "email": "vscode@codyhoover.com",
-        "url": "https://github.com/hoovercj"
+        "name": "Greg Horvay",
+        "email": "horvay@gmail.com",
+        "url": "https://github.com/horvay"
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/hoovercj/vscode-power-mode/issues"
+        "url": "https://github.com/horvay/vscode-power-mode/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/hoovercj/vscode-power-mode.git"
+        "url": "https://github.com/horvay/vscode-power-mode.git"
     },
-    "homepage": "https://github.com/hoovercj/vscode-power-mode",
+    "homepage": "https://github.com/horvay/vscode-power-mode",
     "engines": {
         "vscode": "^1.13.0"
     },
