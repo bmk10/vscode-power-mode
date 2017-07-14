@@ -170,7 +170,7 @@ function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
     }
 
     if (isPowerMode()) {
-        if (enableExplosions && cursorExploder) {
+        if (enableExplosions && event.document.languageId.indexOf("output") === -1 && event.contentChanges[0].text !== " " && cursorExploder) {
             cursorExploder.explode();
         }
 
