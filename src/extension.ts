@@ -161,7 +161,7 @@ function isPowerMode() {
 }
 
 function onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
-    if (event.document.languageId.indexOf("utput") !== -1 ||
+    if (event.document.languageId.indexOf("utput") !== -1 || // filter out the bottom output screens
         event.contentChanges.length === 0 ||
         event.contentChanges[0].text.trim() === "") {
         return;

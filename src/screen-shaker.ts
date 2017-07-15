@@ -57,13 +57,13 @@ export class ScreenShaker {
         // This approach is used so that the decorations themselves can
         // be reused. My assumption is that this is more performant than
         // disposing and creating a new decoration each time.
-        if (Math.random() > 0.5) {
-            activeEditor.setDecorations(this.negativeX, []);
-            activeEditor.setDecorations(this.positiveX, xRanges);
-        } else {
-            activeEditor.setDecorations(this.positiveX, []);
-            activeEditor.setDecorations(this.negativeX, xRanges);
-        }
+        // if (Math.random() > 0.5) {
+        activeEditor.setDecorations(this.negativeX, []);
+        activeEditor.setDecorations(this.positiveX, xRanges);
+        // } else {
+        //     activeEditor.setDecorations(this.positiveX, []);
+        //     activeEditor.setDecorations(this.negativeX, xRanges);
+        // }
 
         // if (Math.random() > 0.5) {
         //     activeEditor.setDecorations(this.negativeY, []);
@@ -73,7 +73,7 @@ export class ScreenShaker {
         //     activeEditor.setDecorations(this.negativeY, this.fullRange);
         // }
 
-        setTimeout(this.unshake, 200);
+        setTimeout(this.unshake, 100);
     }
 
     /**
